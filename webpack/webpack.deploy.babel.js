@@ -42,57 +42,44 @@ const config = {
     publicPath: src[process.env.DEV_ENV],
   },
   resolve: {
-    modulesDirectories: [
-      'src',
-      'node_modules',
-      // 'src/assets'
+    // modulesDirectories: [
+    //   'src',
+    //   'node_modules',
+    //   // 'src/assets'
+    // ],
+    // extensions: ['', '.json', '.js', '.png']
+    modules: [
+      path.join(ROOT_PATH, "src"),
+      "node_modules"
     ],
-    extensions: ['', '.json', '.js', '.png']
   },
   module: {
-    loaders: [{
-      test: /\.scss$/,
-      loader: ExtractTextPlugin.extract(
-        'css?-minimize!sass'
-      )
+    rules: [{
+      test: /\.scss$/i,
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: ['css-loader', 'sass-loader'],
+      }),
     }, {
       test: /\.(js|jsx)?$/,
       exclude: /node_modules/,
-      loader: 'babel',
-    }, {
-      test: /\.json?$/,
-      loader: 'json'
-    }, {
+      loader: 'babel-loader',
+    }, 
+    // {
+    //   test: /\.json?$/,
+    //   loader: 'json'
+    // },
+     {
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style', 'css')
+      use: ExtractTextPlugin.extract([
+        'css-loader',
+      ]),
     }, {
       test: /\.(jp?g|gif|png|woff|ico)$/,
       loaders: ['url-loader?limit=8192&name=[name].[hash:4].[ext]']
     }]
   },
-  imagemin: {
-    gifsicle: {
-      interlaced: false
-    },
-    jpegtran: {
-      progressive: true,
-      arithmetic: false
-    },
-    optipng: {
-      optimizationLevel: 5
-    },
-    pngquant: {
-      floyd: 0.5,
-      speed: 2
-    },
-    svgo: {
-      plugins: [{
-        removeTitle: true
-      }, {
-        convertPathData: false
-      }]
-    }
-  },
+  
   plugins: [
     new HtmlWebpackPlugin({
       title: '项目名',
@@ -105,8 +92,11 @@ const config = {
       modules: true
     }),
     new ExtractTextPlugin('app.css'),
-    new webpack.optimize.CommonsChunkPlugin('shared', 'shared.js'),
-    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'shared',
+      filename: 'shared.js'
+    }),
+    // new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: false,
       cache: false,
@@ -118,10 +108,37 @@ const config = {
         comments: false
       }
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
+    // new webpack.optimize.OccurenceOrderPlugin(), // 弃用
     new webpack.optimize.AggressiveMergingPlugin({
       minSizeReduce: 1.5,
       moveToParents: true
+    }),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        imagemin: {
+          gifsicle: {
+            interlaced: false
+          },
+          jpegtran: {
+            progressive: true,
+            arithmetic: false
+          },
+          optipng: {
+            optimizationLevel: 5
+          },
+          pngquant: {
+            floyd: 0.5,
+            speed: 2
+          },
+          svgo: {
+            plugins: [{
+              removeTitle: true
+            }, {
+              convertPathData: false
+            }]
+          }
+        },
+      }
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)

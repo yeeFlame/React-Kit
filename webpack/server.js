@@ -8,7 +8,7 @@ import ip from 'ip';
 import fs from 'fs';
 import colors from 'colors';
 
-const { ROOT_PATH } = config;
+const ROOT_PATH = path.resolve(__dirname, '..');
 
 
 const isDeveloping = process.env.NODE_ENV !== 'production';

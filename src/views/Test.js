@@ -18,15 +18,6 @@ import 'styles/test_scss.scss';
 
 import { getDetail } from '../redux/modules/productDetail';
 
-const testArr = [1,2,3,4,5]; 
-
-const TestArrDom = (props) => {
- const domList = props.arr && props.arr.map((t, i) => {
-    console.log(t,i);
-    return <div key={`indes_${i}`}>{t}</div>
-  });
-  return <div>{domList}</div>
-}
 
 @connect((state) => ({
   data: state.data
@@ -41,13 +32,7 @@ class Test extends Component {
   goTo() {
     this.context.router.push('hello')
   }
-  testArr() {
-    const domList = testArr.map((t, i) => {
-      console.log(t,i);
-      return <div key={`indes_${i}`}>{t}</div>
-    })
-    return <div>{domList}</div>
-  }
+
   componentDidMount() {
     console.log(this.props, 'props');
   }
@@ -58,9 +43,9 @@ class Test extends Component {
       <div className="scss_text">测试scss</div>
       <div className="styleTest">测试less</div>
       <div className="" onTouchTap={this.props.getDetail}>dispatch</div>
-      <TestArrDom
-        arr={testArr}
-      />
+      <img src={require('images/1.png')} width="100%" height="200" />
+      <div className="test_img"></div>
+
     </div>);
   }
 

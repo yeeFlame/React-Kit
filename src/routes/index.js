@@ -7,7 +7,7 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import CoreLayout from 'layouts/CoreLayout';
 import Test from 'views/Test';
-import Hello from 'bundle?lazy!views/Hello';
+import Hello from 'bundle-loader?lazy!views/Hello';
 
 // lazy load
 function lazyLoadComponent(lazyModule) {
