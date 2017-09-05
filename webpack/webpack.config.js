@@ -19,8 +19,8 @@ export default {
   },
   module: {
     loaders: [{
-      test: /\.(less|css)$/,
-      loader: 'style!css!less'
+      test: /\.(scss|css)$/,
+      loader: 'style!css!sass'
     }, {
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,

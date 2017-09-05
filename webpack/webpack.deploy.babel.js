@@ -16,7 +16,7 @@ const node_modules_dir = path.resolve(ROOT_PATH, 'node_modules');
 // TODO 设置路径
 const src = {
   test: 'test',
-  production: 'production'
+  production: './'
 };
 
 const config = {
@@ -51,9 +51,9 @@ const config = {
   },
   module: {
     loaders: [{
-      test: /\.less$/,
+      test: /\.scss$/,
       loader: ExtractTextPlugin.extract(
-        'css?-minimize!less'
+        'css?-minimize!sass'
       )
     }, {
       test: /\.(js|jsx)?$/,

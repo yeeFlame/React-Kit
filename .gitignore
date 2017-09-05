@@ -7,6 +7,8 @@
 *.iml
 out
 gen
+yarn-error.log
 
 dist
 node_modules
+

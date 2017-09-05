@@ -1,0 +1,19 @@
+.test_com {
+    background: #ffffff;
+    color: green;
+    .test_txt {
+        background: #cccccc;
+        color: #03FF03; 
+        .test_txt2 {
+            background: #cccccc;
+            color: #03FF03; 
+        }
+    }
+    
+    .test_txt3 {
+        background: #000;
+        color: #ffffff; 
+        display: flex;
+    }
+
+}

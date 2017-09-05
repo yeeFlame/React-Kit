@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getDetail } from '../redux/modules/productDetail';
 
+import TestCom from 'components/testCom';
+
 @connect((state) => ({productDetail: state.productDetail}),
  (dispatch) => bindActionCreators({ getDetail }, dispatch))
 
@@ -18,7 +20,10 @@ class Hello extends Component {
   }
 
   render() {
-    return (<div>Hello routerReducer!!{this.props.productDetail.data}</div>);
+    return (<div>
+      Hello routerReducer!!
+      <TestCom />
+      </div>);
   }
 }
 
